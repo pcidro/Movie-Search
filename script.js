@@ -25,9 +25,16 @@ function createMovieCard(movie) {
   movieCard.classList.add("movie");
 
   movieCard.appendChild(createMovieImage(movie));
-  movieCard.appendChild(createMovieTitle(movie));
-  movieCard.appendChild(createMovieRate(movie));
-  movieCard.appendChild(createAddButton());
+
+  const movieTexts = document.createElement("div");
+  movieTexts.classList.add("movie-texts");
+
+  movieTexts.appendChild(createMovieTitle(movie));
+  movieTexts.appendChild(createMovieRate(movie));
+  movieTexts.appendChild(createAddButton());
+
+  movieCard.appendChild(movieTexts);
+
   return movieCard;
 }
 
@@ -61,10 +68,16 @@ function createMovieRate(movie) {
 function createAddButton() {
   const button = document.createElement("button");
   button.classList.add("btn-assistir");
+
   const imgButton = document.createElement("img");
   imgButton.src = "/img/plus.svg";
+
+  const spanText = document.createElement("span");
+  spanText.textContent = "Add To List";
+
   button.appendChild(imgButton);
-  button.textContent = "Add To List";
+  button.appendChild(spanText);
+
   return button;
 }
 
