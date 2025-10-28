@@ -4,9 +4,36 @@ const myListButton = document.querySelector("#my-list");
 const watchButtons = document.querySelectorAll(".btn-assistir");
 const searchIcon = document.getElementById("search-icon");
 
+const storage_key = "mylistv1";
+
+const state = {
+  searchResults: [],
+  myList: new Map(),
+};
+
 searchIcon.addEventListener("click", fetchMovies);
 inputMovie.addEventListener("keyup", (e) => {
   if (e.key === "Enter") fetchMovies();
+});
+
+moviesList.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-assistir");
+  if (!btn) return;
+
+  const card = btn.closest(".movie");
+  if (!card) return;
+
+  const id = Number(card.dataset.id);
+  const movie = getMovieById(id);
+  if (!movie) return;
+  if (isInList(id)) {
+    removeFromList(id);
+    console.log("Removido:", id);
+  } else {
+    addToList(movie);
+    console.log("Adicionado:", id);
+  }
+  console.log("Tamanho da lista:", state.myList.size);
 });
 
 async function fetchMovies() {
@@ -17,13 +44,14 @@ async function fetchMovies() {
     `https://api.themoviedb.org/3/search/movie?api_key=748c8bacfdff03a69d854c2b198d6e30&query=${query}&language=en-US`
   );
   const data = await res.json();
+  state.searchResults = data.results;
   renderMovies(data.results);
 }
 
 function createMovieCard(movie) {
   const movieCard = document.createElement("li");
   movieCard.classList.add("movie");
-
+  movieCard.dataset.id = movie.id;
   movieCard.appendChild(createMovieImage(movie));
 
   const movieTexts = document.createElement("div");
@@ -87,4 +115,37 @@ function renderMovies(movies) {
     const card = createMovieCard(movie);
     moviesList.appendChild(card);
   });
+}
+
+function getMovieById(id) {
+  return state.searchResults.find((movie) => movie.id === id);
+}
+
+function toMyListItem(movie) {
+  return {
+    id: movie.id,
+    title: movie.title,
+    poster: movie.poster_path,
+    rate: movie.vote_average.toFixed(),
+  };
+}
+
+function isInList(id) {
+  return state.myList.has(id);
+}
+
+function addToList(movie) {
+  const item = toMyListItem(movie);
+  state.myList.set(movie.id, item);
+  persistList();
+}
+
+function removeFromList(id) {
+  state.myList.delete(id);
+  persistList();
+}
+
+function persistList() {
+  const arr = [...state.myList.values()];
+  localStorage.setItem(storage_key, JSON.stringify(arr));
 }
