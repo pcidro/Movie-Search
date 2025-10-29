@@ -6,18 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MovieSearch</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <div class="header-container">
     <header class="header">
-      <h1><a href="index.html">Movie Search</a></h1>
+      <h1><a href="index.html">
+          <img src="/img/movie.svg" alt="">
+          Movie Search</a></h1>
 
       <div class="input-wrapper">
-        <img src="/img/search.svg" alt="" id="search-icon">
         <input type="text" id="inputmovie" placeholder="Search a movie...">
+        <img src="/img/search.svg" alt="" id="search-icon">
       </div>
-      <a href="" id="my-list">My List</a>
+
+      <a href="" id="my-list">
+        <img src="/img/love.svg" alt="">
+        My List</a>
     </header>
   </div>
 
@@ -25,21 +33,7 @@
     <h1 id="h1-text">Popular Movies</h1>
 
     <ul class="movies-list">
-      <li class="movie">
-        <img src="img/stars.jpg" alt="" class="movie-img">
 
-        <div class="movie-texts">
-          <h1 class="movie-title">Aventura Espacial</h1>
-          <div class="star-rate">
-            <img src="/img/star.svg" alt="">
-            <span class="rate">8.5</span>
-          </div>
-          <button class="btn-assistir">
-            <img src="img/plus.svg" alt="">
-            Add to List
-          </button>
-        </div>
-      </li>
 
     </ul>
   </section>

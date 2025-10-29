@@ -62,17 +62,27 @@ moviesList.addEventListener("click", (e) => {
 
   if (isInList(id)) {
     removeFromList(id);
-  }
 
-  if (currentView === "list") {
-    card.remove();
+    if (currentView === "list") {
+      card.remove();
 
-    if (state.myList.size === 0) {
-      moviesList.innerHTML = "<p>Nenhum filme na sua lista ainda.</p>";
+      if (state.myList.size === 0) {
+        moviesList.innerHTML = "<p>Nenhum filme na sua lista ainda.</p>";
+        const SearchMoviesBtn = document.createElement("button");
+        SearchMoviesBtn.innerText = "Buscar Filmes";
+        SearchMoviesBtn.classList.add("searchmoviebtn");
+        SearchMoviesBtn.addEventListener("click", () => {
+          currentView = "search";
+          h1text.innerText = "Popular Movies";
+          fetchPopularMovies();
+        });
+        moviesList.appendChild(SearchMoviesBtn);
+      }
     }
   } else {
     addToList(movie);
   }
+
   updateButtonState(btn, id);
 });
 
