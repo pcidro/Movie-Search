@@ -17,6 +17,11 @@ img {
   display: block;
 }
 
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header-container {
   border-bottom: 1px solid #2c2c2c;
 }
@@ -79,6 +84,7 @@ input::placeholder {
 
 .movies-container h1 {
   margin-bottom: 40px;
+  text-align: center;
 }
 
 .movies-list {
@@ -144,5 +150,18 @@ input::placeholder {
   height: 350px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
+  display: block;
+}
+
+.searchmoviebtn {
+  padding: 12px 20px;
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 12px;
   display: block;
 }
