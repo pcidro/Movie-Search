@@ -10,6 +10,7 @@ import {
 
 import { persistList } from "./storage.js";
 import { fetchPopularMovies } from "./api.js";
+import { renderMovieDetails } from "./moviedetails.js";
 
 const moviesList = document.querySelector(".movies-list");
 const h1text = document.getElementById("h1-text");
@@ -43,7 +44,7 @@ export function renderList() {
     moviesList.appendChild(SearchMoviesBtn);
 
     SearchMoviesBtn.addEventListener("click", () => {
-      h1text.innerText = "Popular Movies";
+      h1text.innerText = "Filmes Populares";
       fetchPopularMovies();
     });
 
@@ -151,6 +152,20 @@ export function updateButtonState(button, movieId) {
 // =========================
 // HANDLE BUTTON CLICKS
 // =========================
+
+moviesList.addEventListener("click", (e) => {
+  if (e.target.closest(".btn-assistir")) return;
+
+  const img = e.target.closest("img");
+  if (!img) return;
+
+  const movieCard = img.closest(".movie");
+  if (!movieCard) return;
+
+  const id = Number(movieCard.dataset.id);
+  renderMovieDetails(id);
+});
+
 moviesList.addEventListener("click", (e) => {
   const btn = e.target.closest(".btn-assistir");
   if (!btn) return;

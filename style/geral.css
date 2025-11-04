@@ -1,0 +1,23 @@
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+body {
+  background: #111111;
+  color: aliceblue;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+
+h1 a {
+  text-decoration: none;
+  color: inherit;
+}

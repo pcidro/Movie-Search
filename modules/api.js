@@ -8,7 +8,7 @@ export async function fetchMovies(query) {
   if (!cleanQuery) return;
 
   const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${cleanQuery}&language=en-US`
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${cleanQuery}&language=pt-BR`
   );
   const data = await res.json();
 
@@ -19,11 +19,19 @@ export async function fetchMovies(query) {
 
 export async function fetchPopularMovies() {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR&page=1`
   );
   const data = await res.json();
 
   setCurrentView("search");
   state.searchResults = data.results;
   renderMovies(data.results);
+}
+export async function fetchMovieById(id) {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
+  );
+
+  const data = await res.json();
+  return data;
 }
